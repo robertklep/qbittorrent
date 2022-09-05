@@ -71,7 +71,7 @@ declare class qBittorrentSubClient {
     constructor(client: qBittorrentClient);
 }
 declare class qBittorrentAuthClient extends qBittorrentSubClient {
-    login(): Promise<any>;
+    login(username: string, password: string): Promise<any>;
     logout(): Promise<any>;
 }
 declare class qBittorrentAppClient extends qBittorrentSubClient {

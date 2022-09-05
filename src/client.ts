@@ -109,7 +109,7 @@ export class qBittorrentClient {
   async request(method : string, data : RequestData = {}, options : RequestOptions = {}) {
     // make sure we're logged in
     if (! this.#SID && method !== '/auth/login') {
-      await this.auth.login();
+      await this.auth.login(this.#username, this.#password);
       if (! this.#SID) {
         throw Error('unable to get session id');
       }
@@ -150,8 +150,8 @@ class qBittorrentSubClient {
 
 class qBittorrentAuthClient extends qBittorrentSubClient {
 
-  login() {
-    return this.client.request('/auth/login');
+  login(username : string, password : string) {
+    return this.client.request('/auth/login', { username, password });
   }
 
   logout() {

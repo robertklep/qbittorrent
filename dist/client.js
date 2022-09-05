@@ -58,7 +58,7 @@ class qBittorrentClient {
         return __awaiter(this, void 0, void 0, function* () {
             // make sure we're logged in
             if (!__classPrivateFieldGet(this, _qBittorrentClient_SID, "f") && method !== '/auth/login') {
-                yield this.auth.login();
+                yield this.auth.login(__classPrivateFieldGet(this, _qBittorrentClient_username, "f"), __classPrivateFieldGet(this, _qBittorrentClient_password, "f"));
                 if (!__classPrivateFieldGet(this, _qBittorrentClient_SID, "f")) {
                     throw Error('unable to get session id');
                 }
@@ -94,8 +94,8 @@ class qBittorrentSubClient {
     }
 }
 class qBittorrentAuthClient extends qBittorrentSubClient {
-    login() {
-        return this.client.request('/auth/login');
+    login(username, password) {
+        return this.client.request('/auth/login', { username, password });
     }
     logout() {
         return this.client.request('/auth/logout');
