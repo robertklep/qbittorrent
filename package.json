@@ -1,6 +1,6 @@
 {
   "name": "@robertklep/qbittorrent",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "qBittorrent API v2 client",
   "author": "Robert Klep <robert@klep.name>",
   "license": "MIT",
