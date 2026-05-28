@@ -1,6 +1,6 @@
 # qBittorrent v2 API client
 
-Implements almost all of the methods of the current (v2.8.3) qBittorrent [WebUI API](https://github.com/qbittorrent/qBittorrent/wiki/WebUI-API-(qBittorrent-4.1)).
+Implements almost all of the methods of the current (v5.2.1) qBittorrent [WebUI API](https://github.com/qbittorrent/qBittorrent/wiki/WebUI-API-(qBittorrent-5.0)).
 
 Disclaimer: not all of the API methods have been tested.
 

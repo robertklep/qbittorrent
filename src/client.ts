@@ -125,15 +125,21 @@ export class qBittorrentClient {
       }
     }));
 
-    if (response.statusCode !== 200) {
+    if (response.statusCode !== 200 && response.statusCode !== 204) {
       const error      = new qBittorrentClientError(`${ response.statusCode } ${ response.body}`);
       error.statusCode = response.statusCode;
       error.url        = url;
       throw error;
     }
 
-    if (response.cookies?.SID) {
-      this.#SID = response.cookies.SID;
+    if (response.cookies) {
+      // find session cookie
+      for (const cookie in response.cookies) {
+        if (cookie.includes('SID')) {
+          this.#SID = response.cookies[cookie];
+          break;
+        }
+      }
     }
 
     return response.body;
