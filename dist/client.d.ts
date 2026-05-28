@@ -1,17 +1,16 @@
-/// <reference types="node" />
-declare type RequestData = {
+type RequestData = {
     [key: string]: string | number | boolean | undefined | RequestData | TorrentFile[];
 };
-declare type RequestOptions = {
+type RequestOptions = {
     [key: string]: string | number | boolean | undefined;
 };
-export declare type TorrentFile = {
+export type TorrentFile = {
     filename?: string;
     name?: string;
     buffer: Buffer | string;
     content_type: string;
 };
-export declare type TorrentAddParameters = {
+export type TorrentAddParameters = {
     urls: string[] | string;
     torrents: TorrentFile[] | TorrentFile;
     savepath: string;
@@ -30,7 +29,7 @@ export declare type TorrentAddParameters = {
     sequentialDownload: boolean;
     firstLastPiecePrio: boolean;
 };
-export declare type TorrentInfoParameters = {
+export type TorrentInfoParameters = {
     filter: 'all' | 'downloading' | 'seeding' | 'completed' | 'paused' | 'active' | 'inactive' | 'resumed' | 'stalled' | 'stalled_uploading' | 'stalled_downloading' | 'errored';
     category: string;
     tag: string;
@@ -40,12 +39,12 @@ export declare type TorrentInfoParameters = {
     offset: number;
     hashes: string[] | string;
 };
-export declare type TorrentSearchStatus = {
+export type TorrentSearchStatus = {
     id: number;
     status: string;
     total: number;
 };
-export declare type TorrentSearchResult = {
+export type TorrentSearchResult = {
     descrLink: string;
     fileName: string;
     fileSize: number;

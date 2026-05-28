@@ -53,9 +53,8 @@ class qBittorrentClient {
         this.torrents = new qBittorrentTorrentsClient(this);
         this.search = new qBittorrentSearchClient(this);
     }
-    request(method, data = {}, options = {}) {
-        var _a;
-        return __awaiter(this, void 0, void 0, function* () {
+    request(method_1) {
+        return __awaiter(this, arguments, void 0, function* (method, data = {}, options = {}) {
             // make sure we're logged in
             if (!__classPrivateFieldGet(this, _qBittorrentClient_SID, "f") && method !== '/auth/login') {
                 yield this.auth.login(__classPrivateFieldGet(this, _qBittorrentClient_username, "f"), __classPrivateFieldGet(this, _qBittorrentClient_password, "f"));
@@ -73,14 +72,20 @@ class qBittorrentClient {
                     SID: __classPrivateFieldGet(this, _qBittorrentClient_SID, "f")
                 }
             }));
-            if (response.statusCode !== 200) {
+            if (response.statusCode !== 200 && response.statusCode !== 204) {
                 const error = new qBittorrentClientError(`${response.statusCode} ${response.body}`);
                 error.statusCode = response.statusCode;
                 error.url = url;
                 throw error;
             }
-            if ((_a = response.cookies) === null || _a === void 0 ? void 0 : _a.SID) {
-                __classPrivateFieldSet(this, _qBittorrentClient_SID, response.cookies.SID, "f");
+            if (response.cookies) {
+                // find session cookie
+                for (const cookie in response.cookies) {
+                    if (cookie.includes('SID')) {
+                        __classPrivateFieldSet(this, _qBittorrentClient_SID, response.cookies[cookie], "f");
+                        break;
+                    }
+                }
             }
             return response.body;
         });
@@ -345,8 +350,8 @@ class qBittorrentTorrentsClient extends qBittorrentSubClient {
     }
 }
 class qBittorrentSearchClient extends qBittorrentSubClient {
-    start(pattern, plugins = 'all', category = 'all') {
-        return __awaiter(this, void 0, void 0, function* () {
+    start(pattern_1) {
+        return __awaiter(this, arguments, void 0, function* (pattern, plugins = 'all', category = 'all') {
             const { id } = yield this.client.request('/search/start', { pattern, plugins: join(plugins), category: join(category) });
             return id;
         });
@@ -363,8 +368,8 @@ class qBittorrentSearchClient extends qBittorrentSubClient {
             return res;
         });
     }
-    results(id, limit = 0, offset = 0) {
-        return __awaiter(this, void 0, void 0, function* () {
+    results(id_1) {
+        return __awaiter(this, arguments, void 0, function* (id, limit = 0, offset = 0) {
             return (yield this.client.request('/search/results', { id, limit, offset })).results;
         });
     }

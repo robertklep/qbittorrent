@@ -4,15 +4,17 @@
   "description": "qBittorrent API v2 client",
   "author": "Robert Klep <robert@klep.name>",
   "license": "MIT",
-  "repository" : "robertklep/qbittorrent",
+  "repository": "robertklep/qbittorrent",
   "main": "./dist/client.js",
   "types": "./dist/client.d.ts",
-  "files" : [ "dist/**/*" ],
+  "files": [
+    "dist/**/*"
+  ],
   "scripts": {
-    "build" : "tsc"
+    "build": "tsc"
   },
   "dependencies": {
-    "needle": "^3.0.0"
+    "needle": "^3.5.0"
   },
   "devDependencies": {
     "@types/needle": "^2.5.3"
